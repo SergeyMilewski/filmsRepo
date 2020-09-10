@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ListOfFilms</string>
+    <string name="main_title">Films DB List</string>
 </resources>

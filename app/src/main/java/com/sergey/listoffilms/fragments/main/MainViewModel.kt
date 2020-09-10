@@ -1,4 +1,4 @@
-package com.sergey.listoffilms.ui.main
+package com.sergey.listoffilms.fragments.main
 
 import androidx.lifecycle.ViewModel
 

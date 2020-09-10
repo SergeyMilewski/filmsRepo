@@ -2,16 +2,22 @@ package com.sergey.listoffilms
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.sergey.listoffilms.ui.main.MainFragment
+import com.sergey.listoffilms.databinding.MainActivityBinding
+import com.sergey.listoffilms.fragments.main.MainFragment
+import dagger.android.AndroidInjection
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var binding: MainActivityBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        AndroidInjection.inject(this)
+        binding = MainActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
+                    .replace(R.id.fragment_container, MainFragment.newInstance())
                     .commitNow()
         }
     }
