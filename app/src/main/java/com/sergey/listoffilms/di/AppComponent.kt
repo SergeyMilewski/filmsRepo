@@ -20,6 +20,6 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(radiolineApp: FilmApplication)
+    fun inject(filmApp: FilmApplication)
 
 }
