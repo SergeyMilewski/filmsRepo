@@ -4,7 +4,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.sergey.listoffilms.BuildConfig
-import com.sergey.listoffilms.FilmApi
+import com.sergey.listoffilms.api.FilmApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
