@@ -1,10 +1,10 @@
 package com.sergey.listoffilms.api.models
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 const val IMAGES_URL = "https://image.tmdb.org/t/p/w500"
-data class NowPlaying(
+
+data class MoviesResponse(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")
@@ -14,8 +14,7 @@ data class NowPlaying(
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")
-    val totalResults: Int,
-
+    val totalResults: Int
 )
 
 data class Dates(
@@ -35,9 +34,9 @@ data class Movie(
     @SerializedName("poster_path")
     val posterPath: String?,
     @SerializedName("release_date")
-    val releaseDate: Date,
+    val releaseDate: String,
     @SerializedName("adult")
     val adult: Boolean
-){
+) {
     fun imgUrl() = "$IMAGES_URL$posterPath"
 }

@@ -3,16 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@color/search_color"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.main.MainFragment">
 
-    <AutoCompleteTextView
+    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="18dp"
-        android:hint="Type film here"
+        android:hint="Search film here"
+        android:textColorHint="@color/white_with_opacity"
+        android:textColor="@color/white"
+        android:inputType="text|textNoSuggestions"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

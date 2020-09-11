@@ -1,6 +1,6 @@
 package com.sergey.listoffilms.api
 
-import com.sergey.listoffilms.api.models.NowPlaying
+import com.sergey.listoffilms.api.models.MoviesResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.GET
@@ -14,5 +14,9 @@ interface FilmApi {
     fun getNowPlaying(
         @Query("api_key") apiKey: String = API_KEY,
         @Query("page") page: Int
-    ): Single<Response<NowPlaying>>
+    ): Single<Response<MoviesResponse>>
+
+    @GET("search/movie")
+    fun searchMovies(@Query("api_key") apiKey: String = API_KEY,
+                     @Query("query") query: String): Single<Response<MoviesResponse>>
 }

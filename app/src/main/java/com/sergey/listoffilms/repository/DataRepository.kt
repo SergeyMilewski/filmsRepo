@@ -7,7 +7,9 @@ import androidx.paging.PagedList
 import com.sergey.listoffilms.api.FilmApi
 import com.sergey.listoffilms.api.models.Movie
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class DataRepository @Inject constructor(private val filmApi: FilmApi) {
 
     private var moviesDataSource: MoviesDataSource? = null
@@ -28,4 +30,6 @@ class DataRepository @Inject constructor(private val filmApi: FilmApi) {
         }
         return LivePagedListBuilder(dataSource, config).build()
     }
+
+    fun searchFilms(input: CharSequence) = filmApi.searchMovies(query = input.toString())
 }
