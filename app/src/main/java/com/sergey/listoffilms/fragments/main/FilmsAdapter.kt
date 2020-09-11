@@ -14,6 +14,8 @@ const val FAVORITE_PREF = "Favorite.Pref"
 class FilmsAdapter @Inject constructor(private val sharedPreferences: SharedPreferences) :
     PagedListAdapter<Movie, FilmHolder>(COMPARATOR) {
 
+    var clickListener: (Movie?) -> Unit = {}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FilmHolder(
         FilmItemLayoutBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
@@ -24,6 +26,16 @@ class FilmsAdapter @Inject constructor(private val sharedPreferences: SharedPref
         getItem(position)?.let {
             holder.bind(it)
         }
+    }
+
+    override fun onViewAttachedToWindow(holder: FilmHolder) {
+        super.onViewAttachedToWindow(holder)
+        holder.itemView.setOnClickListener { clickListener.invoke(getItem(holder.adapterPosition)) }
+    }
+
+    override fun onViewDetachedFromWindow(holder: FilmHolder) {
+        holder.itemView.setOnClickListener(null)
+        super.onViewDetachedFromWindow(holder)
     }
 
     companion object {

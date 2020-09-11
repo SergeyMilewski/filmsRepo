@@ -5,9 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.jakewharton.rxbinding4.widget.textChangeEvents
+import com.sergey.listoffilms.R
+import com.sergey.listoffilms.api.models.Movie
 import com.sergey.listoffilms.autocomplete.AutoSuggestAdapter
 import com.sergey.listoffilms.databinding.MainFragmentBinding
 import com.sergey.listoffilms.fragments.main.vm.MainViewModel
@@ -18,6 +22,8 @@ import io.reactivex.rxjava3.disposables.Disposable
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+
+const val CLICKED_ITEM = "clicked_item"
 
 class MainFragment : Fragment() {
 
@@ -37,7 +43,6 @@ class MainFragment : Fragment() {
         )
     }
     private var disposable = Disposable.disposed()
-
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -64,13 +69,16 @@ class MainFragment : Fragment() {
         viewBinding.search.apply {
             threshold = 2
             setAdapter(autoCompleteAdapter)
+            setOnItemClickListener { _, _, position, _ ->
+                navigateToDetails(autoCompleteAdapter.getObject(position))
+            }
         }
         viewModel.filmsMutableLiveData.observe(
             viewLifecycleOwner, { adapter.submitList(it) })
         viewModel.autoCompleteMutableLiveData.observe(
             viewLifecycleOwner,
             { autoCompleteAdapter.setSearchData(it) })
-
+        adapter.clickListener = { navigateToDetails(it) }
     }
 
     override fun onResume() {
@@ -88,8 +96,10 @@ class MainFragment : Fragment() {
         disposable.dispose()
     }
 
-    companion object {
-        fun newInstance() = MainFragment()
+    private fun navigateToDetails(movie: Movie?) {
+        findNavController().navigate(
+            R.id.action_navigation_main_to_navigation_details,
+            bundleOf(CLICKED_ITEM to movie)
+        )
     }
-
 }
