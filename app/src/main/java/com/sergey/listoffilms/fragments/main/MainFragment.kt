@@ -28,7 +28,8 @@ class MainFragment : Fragment() {
 
     private lateinit var viewBinding: MainFragmentBinding
 
-    private val adapter: FilmsAdapter by lazy { FilmsAdapter() }
+    @Inject
+    lateinit var adapter: FilmsAdapter
     private val autoCompleteAdapter by lazy {
         AutoSuggestAdapter(
             requireContext(),

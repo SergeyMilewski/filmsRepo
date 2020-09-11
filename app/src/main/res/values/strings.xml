@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ListOfFilms</string>
     <string name="main_title">Films DB List</string>
+    <string name="search_hint">Search film here</string>
 </resources>

@@ -1,18 +1,23 @@
 package com.sergey.listoffilms.fragments.main
 
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.sergey.listoffilms.api.models.Movie
 import com.sergey.listoffilms.databinding.FilmItemLayoutBinding
+import javax.inject.Inject
 
-class FilmsAdapter : PagedListAdapter<Movie, FilmHolder>(COMPARATOR) {
+const val FAVORITE_PREF = "Favorite.Pref"
+
+class FilmsAdapter @Inject constructor(private val sharedPreferences: SharedPreferences) :
+    PagedListAdapter<Movie, FilmHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FilmHolder(
         FilmItemLayoutBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
-        )
+        ), sharedPreferences
     )
 
     override fun onBindViewHolder(holder: FilmHolder, position: Int) {
