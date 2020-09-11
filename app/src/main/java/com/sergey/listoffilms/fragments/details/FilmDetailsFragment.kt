@@ -32,7 +32,7 @@ class FilmDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val movie : Movie? = arguments?.getParcelable(CLICKED_ITEM)
+        val movie: Movie? = arguments?.getParcelable(CLICKED_ITEM)
         GlideApp.with(this)
             .load(movie?.imgUrl())
             .into(viewBinding.imgBackground)
@@ -40,6 +40,6 @@ class FilmDetailsFragment : Fragment() {
         viewBinding.overview.text = movie?.overview
         viewBinding.released.text = movie?.releaseDate
         viewBinding.rankingValue.text = movie?.voteAverage.toString()
-        viewBinding.rating.rating = movie?.voteAverage?.let { it*5/10 }?:0f
+        viewBinding.rating.rating = movie?.voteAverage?.let { it * 5 / 10 } ?: 0f
     }
 }

@@ -1,12 +1,10 @@
 package com.sergey.listoffilms
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.sergey.listoffilms.databinding.MainActivityBinding
-import com.sergey.listoffilms.fragments.main.MainFragment
 import dagger.android.AndroidInjection
 
 class MainActivity : AppCompatActivity() {

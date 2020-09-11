@@ -9,15 +9,18 @@ import com.sergey.listoffilms.api.models.Movie
 import javax.inject.Inject
 import javax.inject.Singleton
 
+const val PAGE_SIZE = 10
+const val INITIAL_LOAD_SIZE = 40
+
 @Singleton
 class DataRepository @Inject constructor(private val filmApi: FilmApi) {
 
     private var moviesDataSource: MoviesDataSource? = null
 
-    fun getNowPlaying(): LiveData<PagedList<Movie>>{
+    fun getNowPlaying(): LiveData<PagedList<Movie>> {
         val config = PagedList.Config.Builder()
-            .setPageSize(10)
-            .setInitialLoadSizeHint(40)
+            .setPageSize(PAGE_SIZE)
+            .setInitialLoadSizeHint(INITIAL_LOAD_SIZE)
             .setEnablePlaceholders(false)
             .build()
 

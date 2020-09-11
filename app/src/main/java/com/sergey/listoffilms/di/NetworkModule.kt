@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 const val BASE_URL = "https://api.themoviedb.org/3/"
+const val TIME_OUT = 5L
 
 @Module
 class NetworkModule {
@@ -37,9 +38,9 @@ class NetworkModule {
             interceptor.level = HttpLoggingInterceptor.Level.BODY
         }
         client.addInterceptor(interceptor)
-        client.connectTimeout(5, TimeUnit.SECONDS)
-        client.readTimeout(5, TimeUnit.SECONDS)
-        client.writeTimeout(5, TimeUnit.SECONDS)
+        client.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+        client.readTimeout(TIME_OUT, TimeUnit.SECONDS)
+        client.writeTimeout(TIME_OUT, TimeUnit.SECONDS)
         return client.build()
     }
 

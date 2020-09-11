@@ -24,6 +24,8 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 const val CLICKED_ITEM = "clicked_item"
+const val DEBOUNCE_TIME = 500L
+const val CHARS_THRESHOLD = 2
 
 class MainFragment : Fragment() {
 
@@ -67,7 +69,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.listOfFilms.adapter = adapter
         viewBinding.search.apply {
-            threshold = 2
+            threshold = CHARS_THRESHOLD
             setAdapter(autoCompleteAdapter)
             setOnItemClickListener { _, _, position, _ ->
                 navigateToDetails(autoCompleteAdapter.getObject(position))
@@ -86,7 +88,7 @@ class MainFragment : Fragment() {
         disposable = viewBinding.search.textChangeEvents()
             .map { it.text }
             .subscribeOn(AndroidSchedulers.mainThread())
-            .debounce(500, TimeUnit.MILLISECONDS)
+            .debounce(DEBOUNCE_TIME, TimeUnit.MILLISECONDS)
             .filter { !it.isNullOrBlank() }
             .subscribe({ viewModel.searchFilms(it) }, { Timber.e(it) })
     }
